@@ -1,0 +1,59 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+Label{
+	-fx-font-size: 16px;
+	-fx-font-weight: bold;
+}
+
+TextArea{
+	-fx-font-family:  "Arial";
+	-fx-border-color: black ;
+}
+
+TextField{
+	-fx-font-size:18px;
+}
+
+.text-area {
+	-fx-border-width: 0px;
+	-fx-border-radius: 10;
+}
+
+#ControllerDialog{
+	-fx-background-color: red;
+}
+
+CheckBox{
+	-fx-font-weight: bold;
+	-fx-font-size: 15px;
+}
+
+ComboBox{
+	-fx-pref-height: 30px;
+	-fx-pref-width: 120px;
+	-fx-text-alignment: center;
+}
+
+GridPane{
+	-fx-background-color: azure;
+	-fx-alignment: center;
+}
+
+VBox{
+	-fx-background-color: azure;
+	-fx-alignment: center;
+	-fx-spacing: 15px;
+}
+
+Button{
+	-fx-alignment: center;
+	-fx-font-size: 16px;
+}
+
+#title{
+	-fx-alignment: center ;
+	-fx-font-size: 32px;
+	-fx-font-family: "Arial Black";
+	-fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
