@@ -9,7 +9,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class IndexViewAction {
-
+   
     
 	/**
 	 * 清除发送区与接受区的数据
