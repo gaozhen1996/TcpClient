@@ -338,12 +338,9 @@ public class IndexView {
 				String message = editArea.getText();
 				message = StringUtil.replaceBlank(message);
 				
-				byte[] megByte=ConvertFactory.hexStringToBytes(message);
+				TCPFactory.minaClient.sendMessage(message.getBytes());
 				
-				TCPFactory.minaClient.sendMessage(megByte);
-				
-				String result=ConvertFactory.bytesToHexString(megByte);
-				sendArea.appendText(sdf.format(new Date()) +" 发送:\t"+result+"\n");
+				sendArea.appendText(sdf.format(new Date()) +" 发送:\t"+message+"\n");
 			}
 		});
 

@@ -28,8 +28,9 @@ import javafx.stage.Stage;
 public class ConnectionView {
 
 //	private static String defIp = "192.168.1.107";
-	private static String defIp = "192.168.31.208";
+//	private static String defIp = "192.168.31.208";
 //	private static String defIp = "47.93.222.143";
+	private static String defIp = "127.0.0.1";
 	
 	public Map<String, Object> options(double width, double height, Label connect) {
 
@@ -79,7 +80,7 @@ public class ConnectionView {
 			ipText.setText(defIp);
 		}
 
-		portText.setText("8123");
+		portText.setText("6123");
 		
 		/**
 		 * 打开串口按钮
