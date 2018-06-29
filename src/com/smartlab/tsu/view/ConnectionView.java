@@ -79,7 +79,7 @@ public class ConnectionView {
 			ipText.setText(defIp);
 		}
 
-		portText.setText("9122");
+		portText.setText("54321");
 		
 		/**
 		 * 打开串口按钮
