@@ -7,6 +7,7 @@ import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 
+import com.smartlab.tsu.factory.ConfigFactory;
 import com.smartlab.tsu.util.ConvertFactory;
 import com.smartlab.tsu.view.IndexView;
 
@@ -41,7 +42,12 @@ public class MinaClientHandler extends IoHandlerAdapter {
 		byte[] byten = new byte[bbuf.limit()];
 		bbuf.get(byten, bbuf.position(), bbuf.limit());
 
-		String result = ConvertFactory.bytesToHexString(byten);
+		String result = null;
+		if(ConfigFactory.parseStyle.equals("String")) {
+			result = new String(byten);
+		}else {
+			result = ConvertFactory.bytesToHexString(byten);
+		}
 		IndexView.recordArea.appendText( sdf.format(new Date()) +" 接收:\t"+result+"\n");
         
     }  

@@ -1,6 +1,7 @@
 package com.smartlab.tsu.view;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,11 +27,42 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ConnectionView {
-
-//	private static String defIp = "192.168.1.107";
-	private static String defIp = "127.0.0.1";
-//	private static String defIp = "47.93.222.143";
 	
+	private static String defIp = "127.0.0.1";
+
+	private static String defPort = "54321";
+
+	private static File configfile = new File(".tcpsystem.data");
+
+	private Map<String, String> configPara;
+
+	public ConnectionView() {
+		if (configfile == null) {
+			try {
+				configfile.createNewFile();
+			} catch (IOException e) {
+				System.out.println("创建配置文件失败");
+			}
+		} else {
+			try {
+				@SuppressWarnings("unchecked")
+				Map<String, String> configPara = (Map<String, String>) FileUtil.readObjectFromFile(configfile);
+				String defIptemp = configPara.get("defIp");
+				String defPorttemp = configPara.get("defPort");
+				if (defIptemp != null && defIptemp.length() > 0 && defPorttemp != null && defPorttemp.length() > 0) {
+					defIp = configPara.get("defIp");
+					defPort = configPara.get("defPort");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				defIp = "127.0.0.1";
+				defPort = "54321";
+			}
+
+		}
+	}
+
 	public Map<String, Object> options(double width, double height, Label connect) {
 
 		Map<String, Object> parameter = new HashMap<String, Object>();
@@ -56,7 +88,7 @@ public class ConnectionView {
 		/**
 		 * ip设置控件
 		 */
-		Label ipLabel = new Label("TP:");
+		Label ipLabel = new Label("IP:");
 		TextField ipText = new TextField();
 		managePane.add(ipLabel, 0, 3);
 		managePane.add(ipText, 2, 3);
@@ -68,19 +100,11 @@ public class ConnectionView {
 		TextField portText = new TextField();
 		managePane.add(portLabel, 0, 5);
 		managePane.add(portText, 2, 5);
-		
-		
-		File file=new File("IP.txt");
-		//设置默认值
-		if(file.exists()) {
-			String IP=FileUtil.readFileByChars(file).toString();
-			ipText.setText(IP);
-		}else {
-			ipText.setText(defIp);
-		}
 
-		portText.setText("54321");
-		
+
+		ipText.setText(defIp);
+		portText.setText(defPort);
+
 		/**
 		 * 打开串口按钮
 		 */
@@ -88,7 +112,6 @@ public class ConnectionView {
 		managePane.add(portSwitch, 0, 7, 3, 1);
 		GridPane.setHalignment(portSwitch, HPos.CENTER);
 
-		
 		VBox layout = new VBox();
 		layout.setAlignment(Pos.CENTER);
 
@@ -105,11 +128,16 @@ public class ConnectionView {
 		stage.setScene(scene);
 
 		/************************
-		 * * ACTION * *
+		 * * 连接 ACTION * *
 		 ************************/
 		portSwitch.setOnAction((ActionEvent e) -> {
 			String host = ipText.getText();
 			int port = Integer.parseInt(portText.getText());
+
+			configPara = new HashMap<>();
+			configPara.put("defIp", ipText.getText());
+			configPara.put("defPort", portText.getText());
+			FileUtil.writeObjectToFile(configfile, configPara);
 
 			new Thread(new Runnable() {
 				@Override
@@ -117,36 +145,45 @@ public class ConnectionView {
 
 					try {
 						
-						//更新主线程
+						// 更新主线程
 						Platform.runLater(new Runnable() {
-						    @Override
-						    public void run() {
-						    	connect.setText(host + " : " + port + "已连接");
-						    	stage.close();
-						    }
+							@Override
+							public void run() {
+								connect.setText("连接中...");
+								stage.close();
+							}
 						});
 						
 						TCPFactory.minaClient = new MinaClient();
 						TCPFactory.minaClient.config(host, port);
 						
-					} catch (Exception e2) {
-						TCPFactory.minaClient=null;
-						//更新主线程
+						// 更新主线程
 						Platform.runLater(new Runnable() {
-						    @Override
-						    public void run() {
-						    	connect.setText("未连接");
-						    	Alert error = new Alert(Alert.AlertType.INFORMATION, "服务器拒绝连接!");
+							@Override
+							public void run() {
+								connect.setText(host + " : " + port + "已连接");
+								stage.close();
+							}
+						});
+
+						
+					} catch (Exception e2) {
+						TCPFactory.minaClient = null;
+						// 更新主线程
+						Platform.runLater(new Runnable() {
+							@Override
+							public void run() {
+								connect.setText("未连接");
+								Alert error = new Alert(Alert.AlertType.INFORMATION, "服务器拒绝连接!");
 								error.showAndWait();
-						    }
+							}
 						});
 					}
 
 				}
 			}) {
 			}.start();
-			
-			
+
 		});
 
 		// 使用showAndWait()先处理这个窗口，而如果不处理，main中的那个窗口不能响应
@@ -154,4 +191,9 @@ public class ConnectionView {
 		return parameter;
 	}
 
+	
+	
+	
+	
+	
 }

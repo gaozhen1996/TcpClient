@@ -15,11 +15,11 @@ public class HelpView {
 
 	public void init(double width, double height) {
 		Label label=new Label("如果在使用中，有任何问题，\n\n"
-				+ "请联系smartlab\n\n"
-				+ "或访问我们的官网\n\n"
-				+ "www.smartlab411.com\n\n"
-				+"本软件由smartlab提供技术支持\n\n"
-				+"解释权归smartlab所有");
+				+ "请联系高振\n\n"
+				+ "QQ:3168175817\n\n"
+				+ "邮箱:gaozhen3h@163.com\n\n"
+				+"本软件由高振提供技术支持\n\n"
+				+"解释权归高振所有");
 		setStage(width, height, label);
 	}
 

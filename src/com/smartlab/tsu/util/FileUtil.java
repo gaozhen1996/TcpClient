@@ -20,6 +20,47 @@ import java.util.List;
  */
 public class FileUtil {
 
+	/**
+	 * @param path 
+	 * @param obj
+	 */
+	public static boolean writeObjectToFile(File file,Object obj){
+		boolean result= false;
+        FileOutputStream out;
+        try {
+            out = new FileOutputStream(file);
+            ObjectOutputStream objOut=new ObjectOutputStream(out);
+            objOut.writeObject(obj);
+            objOut.flush();
+            objOut.close();
+            result = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+	
+	/**
+	 * @return
+	 */
+	public static Object readObjectFromFile(File file)
+    {
+        Object temp=null;
+        FileInputStream in;
+        try {
+            in = new FileInputStream(file);
+            ObjectInputStream objIn=new ObjectInputStream(in);
+            temp=objIn.readObject();
+            objIn.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return temp;
+    }
+	
+	
 	@SuppressWarnings({ "unchecked", "resource" })
 	public static List<?> readList(String path) {
 		FileInputStream freader;
