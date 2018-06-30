@@ -35,7 +35,11 @@ public class ConnectionView {
 	private static File configfile = new File(".tcpsystem.data");
 
 	private Map<String, String> configPara;
-
+	
+	public static Label connect;
+	
+	public static Stage stage;
+	
 	public ConnectionView() {
 		if (configfile == null) {
 			try {
@@ -126,6 +130,14 @@ public class ConnectionView {
 		stage.setMinWidth(width / 4);
 		stage.setMinHeight(height / 2);
 		stage.setScene(scene);
+		
+		
+		/**
+		 * 赋值
+		 */
+		ConnectionView.connect=connect;
+		ConnectionView.stage=stage;
+				
 
 		/************************
 		 * * 连接 ACTION * *
@@ -144,28 +156,16 @@ public class ConnectionView {
 				public void run() {
 
 					try {
-						
 						// 更新主线程
 						Platform.runLater(new Runnable() {
 							@Override
 							public void run() {
 								connect.setText("连接中...");
-								stage.close();
 							}
 						});
 						
 						TCPFactory.minaClient = new MinaClient();
 						TCPFactory.minaClient.config(host, port);
-						
-						// 更新主线程
-						Platform.runLater(new Runnable() {
-							@Override
-							public void run() {
-								connect.setText(host + " : " + port + "已连接");
-								stage.close();
-							}
-						});
-
 						
 					} catch (Exception e2) {
 						TCPFactory.minaClient = null;

@@ -73,41 +73,6 @@ public class MinaClient {
 		session.write(message);
 	}
 	
-	/**
-	 * 
-	* @Description:测试
-	* @param  参数说明
-	* @return void    返回类型
-	* @author gaozhen
-	 */
-	public void sendFutrueMessage(String message) {
 		
-//		session.getConfig().setUseReadOperation(true);  
-//        org.apache.mina.core.future.WriteFuture future = session.write(message.getBytes()); // 发送数据  
-//        future.awaitUninterruptibly(); // 等待发送数据操作完成  
-//        if (future.getException() != null) {  
-//        	
-//        }  
-//        if (future.isWritten()) {  
-//            // 数据已经被成功发送  
-//            System.out.println("数据已经被成功发送");  
-//            ReadFuture readFuture = sendSession.read();  
-//            readFuture.awaitUninterruptibly();  
-//            if (readFuture.getException() != null) {  
-//                throw new AppException(readFuture.getException().getMessage());  
-//            }  
-//            sendSession.getConfig().setUseReadOperation(false);  
-//            return ((XmlMsgBean) readFuture.getMessage()).getStrErrMsg();  
-//        } else {  
-//            // 数据发送失败  
-//            System.out.println("数据发送失败");  
-//        }  
-//		
-		
-	}
-	
-	
-	
-	
 
 }

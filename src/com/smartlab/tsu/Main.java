@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -25,8 +24,6 @@ public class Main extends Application {
 		primaryStage.setTitle("SMARTLAB TCP调试工具");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-
 	}
 
 }

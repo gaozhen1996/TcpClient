@@ -42,7 +42,7 @@ public class IndexView {
 	// MainAction
 	private static IndexViewAction indexViewAction = new IndexViewAction();
 
-	public BorderPane root = new BorderPane();
+	public static BorderPane root = new BorderPane();
 
 	public Scene scene;
 	
@@ -401,7 +401,7 @@ public class IndexView {
 		});
 
 		/**
-		 * 以十六进制格式发送
+		 * 发送数据
 		 */
 		editArea.setOnKeyPressed(new EventHandler<KeyEvent>() {  
 	        @Override  
