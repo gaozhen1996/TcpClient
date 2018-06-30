@@ -7,7 +7,16 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-
+/**
+ * 
+* <p>
+* Description:主类
+* <p>
+* Company: SMARTLAB 
+* @author gaozhen
+* @date 2018年6月30日
+* @Version 1.1
+ */
 public class Main extends Application {
 
 	public static void main(String[] args) {
